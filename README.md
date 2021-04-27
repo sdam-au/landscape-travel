@@ -1,14 +1,14 @@
-# Meaningful title for the repository
-*pick type of repository (TOOL, ETL, ANALYSIS, ADMIN)*
+# Ease of Foot Travel Across the Roman Empire 
+*ANALYSIS*
 
 ---
 
 ## Purpose
-[In two to three sentences state the purpose of this repository, ideally tying it to an existing SDAM milestone. E.g., The purpose of this repository is to provide templates for all future SDAM repositories in order to save precious time and maintain high standards and uniformity of our documentation.]
+Code in this repository includes functions to download SRTM raster data covering the extent of the Roman Empire, mosaic it together and process the elevations to generate conductance matrix, useful for calculating travel time between point coordinates in the raster.  THe specific examples show travel time to and between cities with popultation greater than 1000 adn 5000 people respectively.  The conductance matrix (or matrices) can be used to calculate travel time and distance between any two or more arbitrary points.
 
 ---
 ## Authors
-* Petra Hermankova [![](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0000-0002-6349-0540), SDAM project, petra@ancientsocialcomplexity.org
+* Adela Sobotkova [![](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0000-0002-4541-3963), SDAM project, admin@ancientsocialcomplexity.org
 * [Name], [ORCID], [Institution], [email]
 * [Name], [ORCID], [Institution], [email]
 * [Name], [ORCID], [Institution], [email]
@@ -26,34 +26,29 @@ CC-BY-SA 4.0, see attached License.md
 # How to use this repository
 
 ## Sources and prerequisites
-[Describe the provenance of data used in the scripts contained and clarify how it is harvested and what other prerequisites are required to get the scripts working. In case of pure tool attribute any reused scripts to source, etc., license and specify any prerequisites or technical requirements.]
+I created and successfuly ran the LeastCostRatser_General.Rmd on Ucloud, using a 192Gb RAM and unlimited storage. The final mosaiced raster has 158.4Mb and the conductance transition layer takes up 2.1 Gb of memory in R (928.9 Mb file storage). Choose an adequately resourced machine or descale or alter the computational tasks. One can reduce the spatial extent  - currently the southern boundary is deep in Sahara, which is counterproductive. One can also further aggregate the mosaiced raster by a factor of 10. 
+Early example uses only 2 SRTM tiles and Italy. A loop is provided to repeat analysis at this scale to deliberate part of the region.
+
+
+The scripts reply on R libraries of tidyverse, raster, sf, and gdistance. Depending on where the point data comes from, you may also need jsonlite and getPass or sdam library.
+
+How to:
+
+
 
 ### Data
 Anything else on data metadata and data used. Link to data repository or explanatory article. 
 
 ### Software
-1. Software X, minimum version 123
-1. Software Y, version 456
-
-### Registered account
-1. CompanyA
-1. CompanyB
-
-### Hardware
-1. Multiple-screen
-1. Mouse
-1. Coffee
-
----
-## Installation
-[Describe the steps necessary to install the tool/package; example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2]
+1. Software R, minimum version 4.03
+1. Software R Studio, version 1.3.1073
 
 ---
 ## Instructions 
 [Describe first steps, how to use the current repository by a typical user - the digital historian with limited technical skills]
-1. First, do ...
-1. Second, do ...
-1. Third, go to ...
+1. First, work your way through LeastCostRaster_General.Rmd to follow the process step-by-step. 
+2. Second, if you are ready to apply the batch-analysis to a region of your choice, you can run the LCPfunction.R with the calc.conductance and traveltotown functions and apply these functions to regions specified by lat/long directly. Beware that the traveltotown relies on localcity dataset to not be NULL.
+3. Third, go to ...
 
 
 ## Screenshots
